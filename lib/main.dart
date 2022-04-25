@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
+import 'pages/member_profile.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +10,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        fontFamily: 'Poppins'
+        fontFamily: 'Poppins',
       ),
       home: MemberProfile(),
     );
