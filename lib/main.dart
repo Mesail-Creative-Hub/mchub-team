@@ -8,12 +8,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'Poppins'
-      ),
-      home: MemberProfile(),
+      theme: ThemeData(fontFamily: 'Poppins'),
+      home: SafeArea(child: Home()),
     );
   }
 }
-
-
