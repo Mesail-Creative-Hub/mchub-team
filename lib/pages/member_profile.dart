@@ -17,7 +17,7 @@ class MemberProfile extends StatelessWidget {
             SizedBox(height: 40,),
             Text(
                 'Mulia Firmansyah',
-                style: textStyle(whiteColor, textSm, textBold)
+                style: textStyle(whiteColor, textSm, textBold, 1.5)
             )
 
           ],

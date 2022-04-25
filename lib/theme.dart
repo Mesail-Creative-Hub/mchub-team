@@ -16,10 +16,11 @@ double textMd = 16;
 double textSm = 14;
 
 // Bold Font
-TextStyle textStyle (Color clr, double fs, FontWeight fw ) {
+TextStyle textStyle (Color clr, double fs, FontWeight fw, [double spacing = .5] ) {
   return TextStyle(
     fontSize: fs,
       fontWeight: fw,
-      color: clr
+      color: clr,
+    letterSpacing: spacing
   );
 }
