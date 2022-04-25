@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'pages/home_page.dart';
 
-void main() => runApp(MaterialApp(
-  debugShowCheckedModeBanner: false,
-  home: MemberProfile(),
-));
+void main() => runApp(MyApp());
 
-class MemberProfile extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.amberAccent,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        fontFamily: 'Poppins'
+      ),
+      home: MemberProfile(),
     );
   }
 }
+
 
