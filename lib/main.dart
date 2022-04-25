@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         fontFamily: 'Poppins',
       ),
-      home: MemberProfile(),
+      home: SafeArea(child: MemberProfile()),
     );
   }
 }
