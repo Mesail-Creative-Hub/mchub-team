@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:member_profile/theme.dart';
 
@@ -13,8 +15,16 @@ class Home extends StatelessWidget {
           constraints: const BoxConstraints(),
           child: Column(
             children: [
-              const Header(),
-              const TeamMember(),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                height: MediaQuery.of(context).size.height * .15,
+                child: const Header(),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                height: MediaQuery.of(context).size.height * 1,
+                child: const TeamMember(),
+              ),
             ],
           ),
         ),
@@ -28,20 +38,45 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Row(
-        children: [
-          const CircleAvatar(
-            backgroundImage: NetworkImage(
-              "https://miro.medium.com/fit/c/176/176/1*Us-tll_61uzjO2bJVYRr6Q.png",
+    return Row(
+      children: [
+        Expanded(
+          flex: 2,
+          child: Image.asset(
+            "assets/images/logo-mchub.png",
+            scale: .8,
+          ),
+        ),
+        Expanded(
+          flex: 6,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0)
+                .add(const EdgeInsets.only(bottom: 10)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Good Morning",
+                  style: textStyle(greyColor, textMd, textRegular),
+                ),
+                Text(
+                  "Mesail Creative Hub",
+                  style: textStyle(whiteColor, textLg, textBold),
+                ),
+              ],
             ),
           ),
-          Column(
-            children: const [Text("Good Morning"), Text("Mesail Creative Hub")],
+        ),
+        Expanded(
+          flex: 2,
+          child: Icon(
+            Icons.notifications,
+            color: whiteColor,
+            size: 24,
           ),
-          const Icon(Icons.notifications)
-        ],
-      ),
+        )
+      ],
     );
   }
 }
@@ -60,40 +95,46 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabCtrl = TabController(initialIndex: 1, length: 3, vsync: this);
+    _tabCtrl = TabController(initialIndex: 1, length: 6, vsync: this);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          Row(
+    return Column(
+      children: [
+        Expanded(
+          child: Row(
             children: [
-              TextField(
-                controller: _searchCtrl,
-                decoration: const InputDecoration(
-                  labelText: "Find your favorite mentor",
-                  hintText: "Search",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
+              Expanded(
+                child: TextField(
+                  controller: _searchCtrl,
+                  decoration: const InputDecoration(
+                    labelText: "Find your favorite mentor",
+                    hintText: "Search",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20),
+                      ),
                     ),
                   ),
                 ),
               ),
-              Container(
-                color: Colors.blue,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(20),
+                    ),
                   ),
+                  child: const Icon(Icons.search),
                 ),
-                child: const Icon(Icons.search),
               ),
             ],
           ),
-          TabBar(
+        ),
+        Expanded(
+          child: TabBar(
             controller: _tabCtrl,
             tabs: const [
               Tab(
@@ -116,7 +157,9 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
               ),
             ],
           ),
-          Column(
+        ),
+        Expanded(
+          child: Column(
             children: [
               const Text("Top Mentor"),
               ListView.builder(
@@ -138,9 +181,9 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                 ),
               ),
             ],
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -157,11 +200,12 @@ class Tips extends StatelessWidget {
           itemCount: 5,
           itemBuilder: (context, index) => Stack(
             children: [
-              Image.network("https://img.freepik.com/free-vector/gradient-abstract-background-design_23-2149066048.jpg?size=626&ext=jpg"),
+              Image.network(
+                  "https://img.freepik.com/free-vector/gradient-abstract-background-design_23-2149066048.jpg?size=626&ext=jpg"),
               const Text("Hello World!")
             ],
           ),
-          )
+        )
       ],
     );
   }
