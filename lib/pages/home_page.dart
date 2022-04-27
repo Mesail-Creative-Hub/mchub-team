@@ -19,7 +19,9 @@ class Home extends StatelessWidget {
                 child: const Header(),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10)
+                    .add(const EdgeInsets.only(top: 20)),
+                height: MediaQuery.of(context).size.height * .8,
                 decoration: BoxDecoration(
                   color: whiteColor,
                   borderRadius: const BorderRadius.only(
@@ -27,7 +29,6 @@ class Home extends StatelessWidget {
                     topRight: Radius.circular(40),
                   ),
                 ),
-                height: MediaQuery.of(context).size.height * 1,
                 child: const TeamMember(),
               ),
             ],
@@ -100,28 +101,31 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _tabCtrl = TabController(initialIndex: 1, length: 6, vsync: this);
+    _tabCtrl = TabController(
+      initialIndex: 1,
+      length: 6,
+      vsync: this,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Expanded(
-          flex: 1,
+        SizedBox(
+          height: 70,
           child: Row(
             children: [
               Expanded(
                 flex: 9,
                 child: TextField(
                   controller: _searchCtrl,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: "Find your favorite mentor",
                     hintText: "Search",
-                    fillColor: greyColor,
-                    filled: true,
-                    border: const OutlineInputBorder(
+                    isDense: true,
+                    contentPadding: EdgeInsets.all(12),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(20),
                       ),
@@ -132,9 +136,7 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
               Expanded(
                   flex: 3,
                   child: Container(
-                    height: double.infinity,
-                    margin: const EdgeInsets.symmetric(
-                        vertical: 17, horizontal: 10),
+                    margin: const EdgeInsets.symmetric(horizontal: 10),
                     decoration: BoxDecoration(
                       color: blueColor,
                       borderRadius: const BorderRadius.all(
@@ -144,18 +146,27 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                     child: IconButton(
                       onPressed: () {},
                       color: whiteColor,
-                      icon: const Icon(Icons.search),
+                      icon: const Icon(
+                        Icons.search,
+                        size: 30,
+                      ),
                     ),
                   )),
             ],
           ),
         ),
-        Expanded(
-          flex: 1,
+        Container(
+          padding: const EdgeInsets.only(top: 10),
+          height: 50,
           child: TabBar(
+            indicator: UnderlineTabIndicator(
+              borderSide: BorderSide(width: 3, color: blueColor),
+              insets: const EdgeInsets.symmetric(horizontal: 50),
+            ),
             isScrollable: true,
             controller: _tabCtrl,
             labelColor: Colors.black,
+            labelStyle: textStyle(Colors.black, textMd, textRegular),
             tabs: const [
               Tab(
                 child: Text("UI/UX Design"),
@@ -178,13 +189,18 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
             ],
           ),
         ),
-        Expanded(
-          flex: 4,
+        Container(
+          padding: const EdgeInsets.only(top: 20),
+          height: 315,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Expanded(
-                flex: 3,
-                child: Text("Top Mentor"),
+              Expanded(
+                flex: 1,
+                child: Text(
+                  "Top Mentor",
+                  style: textStyle(Colors.black, textLg, textBold),
+                ),
               ),
               Expanded(
                 flex: 7,
@@ -192,19 +208,47 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
-                  itemBuilder: (context, index) => SizedBox(
-                    width: MediaQuery.of(context).size.height * .3,
+                  itemBuilder: (context, index) => Container(
+                    width: (MediaQuery.of(context).size.width - 40) / 2,
                     height: 200,
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                      color: greyColor.withOpacity(
+                        0.1,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        CircleAvatar(
+                      children: [
+                        const CircleAvatar(
                           backgroundImage:
                               AssetImage("assets/images/picture.png"),
+                          radius: 40,
                         ),
-                        Text("Mulia Firmansyah Arief"),
-                        Text("Software Development"),
-                        ElevatedButton(onPressed: null, child: Text("Hire"))
+                        Text(
+                          "Mulia Firmansyah Arief",
+                          textAlign: TextAlign.center,
+                          style: textStyle(Colors.black, textMd, textBold),
+                        ),
+                        Text(
+                          "Software Development",
+                          textAlign: TextAlign.center,
+                          style: textStyle(greyColor, textSm, textRegular),
+                        ),
+                        FractionallySizedBox(
+                          widthFactor: .8,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: blueColor,
+                            ),
+                            onPressed: () {},
+                            child: const Text("Hire"),
+                          ),
+                        )
                       ],
                     ),
                   ),

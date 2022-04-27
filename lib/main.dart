@@ -45,22 +45,26 @@ class _AppNavigationState extends State<AppNavigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: "",
+            label: "Home",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark),
-            label: "",
+            label: "Bookmark",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
-            label: "",
+            label: "Message",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_pin),
-            label: "",
+            label: "Profile",
           ),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.blueGrey,
+        showSelectedLabels: true,
+        showUnselectedLabels: false,
+        unselectedItemColor: Colors.grey,
         onTap: (int index) {
           setState(() {
             _selectedIndex = index;
