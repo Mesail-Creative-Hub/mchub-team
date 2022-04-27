@@ -19,9 +19,9 @@ class Home extends StatelessWidget {
                 child: const Header(),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10)
-                    .add(const EdgeInsets.only(top: 20)),
-                height: MediaQuery.of(context).size.height * .8,
+                padding: const EdgeInsets.symmetric(horizontal: 10).add(
+                  const EdgeInsets.only(top: 20),
+                ),
                 decoration: BoxDecoration(
                   color: whiteColor,
                   borderRadius: const BorderRadius.only(
@@ -31,6 +31,14 @@ class Home extends StatelessWidget {
                 ),
                 child: const TeamMember(),
               ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10).add(
+                  const EdgeInsets.only(top: 20),
+                ),
+                height: 200,
+                color: whiteColor,
+                child: const Tips(),
+              )
             ],
           ),
         ),
@@ -102,10 +110,16 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _tabCtrl = TabController(
-      initialIndex: 1,
+      initialIndex: 0,
       length: 6,
       vsync: this,
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _tabCtrl.dispose();
   }
 
   @override
@@ -140,7 +154,7 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                     decoration: BoxDecoration(
                       color: blueColor,
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
+                        Radius.circular(10),
                       ),
                     ),
                     child: IconButton(
@@ -159,14 +173,17 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
           padding: const EdgeInsets.only(top: 10),
           height: 50,
           child: TabBar(
-            indicator: UnderlineTabIndicator(
-              borderSide: BorderSide(width: 3, color: blueColor),
-              insets: const EdgeInsets.symmetric(horizontal: 50),
-            ),
+            indicator: ShapeDecoration(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(10),
+                  ),
+                ),
+                color: blueColor),
             isScrollable: true,
             controller: _tabCtrl,
-            labelColor: Colors.black,
-            labelStyle: textStyle(Colors.black, textMd, textRegular),
+            labelStyle: textStyle(Colors.white, textMd, textRegular),
+            unselectedLabelColor: Colors.black,
             tabs: const [
               Tab(
                 child: Text("UI/UX Design"),
@@ -218,7 +235,7 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                         0.1,
                       ),
                       borderRadius: const BorderRadius.all(
-                        Radius.circular(20),
+                        Radius.circular(10),
                       ),
                     ),
                     child: Column(
@@ -229,18 +246,24 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                               AssetImage("assets/images/picture.png"),
                           radius: 40,
                         ),
-                        Text(
-                          "Mulia Firmansyah Arief",
-                          textAlign: TextAlign.center,
-                          style: textStyle(Colors.black, textMd, textBold),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Mulia Firmansyah Arief",
+                            textAlign: TextAlign.center,
+                            style: textStyle(Colors.black, textMd, textBold),
+                          ),
                         ),
-                        Text(
-                          "Software Development",
-                          textAlign: TextAlign.center,
-                          style: textStyle(greyColor, textSm, textRegular),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Text(
+                            "Software Development",
+                            textAlign: TextAlign.center,
+                            style: textStyle(greyColor, textSm, textRegular),
+                          ),
                         ),
                         FractionallySizedBox(
-                          widthFactor: .8,
+                          widthFactor: .7,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               primary: blueColor,
@@ -268,18 +291,50 @@ class Tips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Mentor Tips"),
-        ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context, index) => Stack(
-            children: [
-              Image.network(
-                  "https://img.freepik.com/free-vector/gradient-abstract-background-design_23-2149066048.jpg?size=626&ext=jpg"),
-              const Text("Hello World!")
-            ],
+        Expanded(
+          flex: 2,
+          child: Text(
+            "Mentor Tips",
+            style: textStyle(Colors.black, textLg, textBold),
           ),
-        )
+        ),
+        Expanded(
+          flex: 8,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5,
+            itemBuilder: (context, index) => Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              width: MediaQuery.of(context).size.width * .7,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(10),
+                    ),
+                    child: Image.network(
+                      "https://img.freepik.com/free-vector/gradient-abstract-background-design_23-2149066048.jpg?size=626&ext=jpg",
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Text(
+                        "Hello World!",
+                        style: textStyle(whiteColor, textLg, textBold),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
