@@ -231,8 +231,8 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
                   itemCount: 5,
+                  itemExtent: (MediaQuery.of(context).size.width - 40) * .5,
                   itemBuilder: (context, index) => Container(
-                    width: (MediaQuery.of(context).size.width - 40) / 2,
                     height: 200,
                     padding: const EdgeInsets.all(5),
                     margin: const EdgeInsets.symmetric(horizontal: 5),
@@ -311,9 +311,9 @@ class Tips extends StatelessWidget {
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: 5,
+            itemExtent: MediaQuery.of(context).size.width * .7,
             itemBuilder: (context, index) => Container(
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              width: MediaQuery.of(context).size.width * .7,
               child: Stack(
                 children: [
                   ClipRRect(
