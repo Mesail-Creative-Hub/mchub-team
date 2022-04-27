@@ -6,21 +6,32 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(),
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              height: 100,
-              child: const Header(),
-            ),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const TeamMember(),
-            ),
-          ],
+    return Scaffold(
+      backgroundColor: darkColor,
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(),
+          child: Column(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                height: MediaQuery.of(context).size.height * .2,
+                child: const Header(),
+              ),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                  color: whiteColor,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(40),
+                    topRight: Radius.circular(40),
+                  ),
+                ),
+                height: MediaQuery.of(context).size.height * 1,
+                child: const TeamMember(),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -95,12 +106,14 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Expanded(
+          flex: 1,
           child: Row(
             children: [
               Expanded(
-                flex: 7,
+                flex: 9,
                 child: TextField(
                   controller: _searchCtrl,
                   decoration: InputDecoration(
@@ -117,24 +130,32 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                 ),
               ),
               Expanded(
-                flex: 3,
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(20),
+                  flex: 3,
+                  child: Container(
+                    height: double.infinity,
+                    margin: const EdgeInsets.symmetric(
+                        vertical: 17, horizontal: 10),
+                    decoration: BoxDecoration(
+                      color: blueColor,
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20),
+                      ),
                     ),
-                  ),
-                  child: const Icon(Icons.search),
-                ),
-              ),
+                    child: IconButton(
+                      onPressed: () {},
+                      color: whiteColor,
+                      icon: const Icon(Icons.search),
+                    ),
+                  )),
             ],
           ),
         ),
         Expanded(
+          flex: 1,
           child: TabBar(
             isScrollable: true,
             controller: _tabCtrl,
+            labelColor: Colors.black,
             tabs: const [
               Tab(
                 child: Text("UI/UX Design"),
@@ -158,24 +179,34 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
           ),
         ),
         Expanded(
+          flex: 4,
           child: Column(
             children: [
-              const Text("Top Mentor"),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: 5,
-                itemBuilder: (context, index) => Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const CircleAvatar(
-                        backgroundImage:
-                            AssetImage("assets/images/picture.png"),
-                      ),
-                      const Text("Mulia Firmansyah Arief"),
-                      const Text("Software Development"),
-                      ElevatedButton(onPressed: null, child: Text("Hire"))
-                    ],
+              const Expanded(
+                flex: 3,
+                child: Text("Top Mentor"),
+              ),
+              Expanded(
+                flex: 7,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) => SizedBox(
+                    width: MediaQuery.of(context).size.height * .3,
+                    height: 200,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        CircleAvatar(
+                          backgroundImage:
+                              AssetImage("assets/images/picture.png"),
+                        ),
+                        Text("Mulia Firmansyah Arief"),
+                        Text("Software Development"),
+                        ElevatedButton(onPressed: null, child: Text("Hire"))
+                      ],
+                    ),
                   ),
                 ),
               ),
