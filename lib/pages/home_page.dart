@@ -19,9 +19,7 @@ class Home extends StatelessWidget {
                 child: const Header(),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10).add(
-                  const EdgeInsets.only(top: 20),
-                ),
+                padding: const EdgeInsets.only(bottom: 20),
                 decoration: BoxDecoration(
                   color: whiteColor,
                   borderRadius: const BorderRadius.only(
@@ -29,15 +27,23 @@ class Home extends StatelessWidget {
                     topRight: Radius.circular(40),
                   ),
                 ),
-                child: const TeamMember(),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10).add(
-                  const EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10).add(
+                        const EdgeInsets.only(top: 20),
+                      ),
+                      child: const TeamMember(),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10).add(
+                        const EdgeInsets.only(top: 20),
+                      ),
+                      height: 200,
+                      child: const Tips(),
+                    )
+                  ],
                 ),
-                height: 200,
-                color: whiteColor,
-                child: const Tips(),
               )
             ],
           ),
