@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:member_profile/theme.dart';
 
@@ -9,27 +7,38 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: darkColor,
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(),
-          child: Column(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: MediaQuery.of(context).size.height * .15,
-                child: const Header(),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                height: MediaQuery.of(context).size.height * 1,
-                child: const TeamMember(),
-              ),
-            ],
+        backgroundColor: darkColor,
+        body: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  height: 100,
+                  child: const Header(),
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: const TeamMember(),
+                ),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.chat),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person_pin),
+            ),
+          ],
+        ));
   }
 }
 
@@ -51,7 +60,7 @@ class Header extends StatelessWidget {
           flex: 6,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0)
-                .add(const EdgeInsets.only(bottom: 10)),
+                .add(const EdgeInsets.only(bottom: 5)),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,12 +115,15 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
           child: Row(
             children: [
               Expanded(
+                flex: 7,
                 child: TextField(
                   controller: _searchCtrl,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: "Find your favorite mentor",
                     hintText: "Search",
-                    border: OutlineInputBorder(
+                    fillColor: greyColor,
+                    filled: true,
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(20),
                       ),
@@ -120,6 +132,7 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Container(
                   decoration: const BoxDecoration(
                     color: Colors.blue,
@@ -135,6 +148,7 @@ class _TeamMember extends State<TeamMember> with TickerProviderStateMixin {
         ),
         Expanded(
           child: TabBar(
+            isScrollable: true,
             controller: _tabCtrl,
             tabs: const [
               Tab(
