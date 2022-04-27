@@ -6,39 +6,24 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: darkColor,
-        body: SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  height: 100,
-                  child: const Header(),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: const TeamMember(),
-                ),
-              ],
+    return SingleChildScrollView(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              height: 100,
+              child: const Header(),
             ),
-          ),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_pin),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: const TeamMember(),
             ),
           ],
-        ));
+        ),
+      ),
+    );
   }
 }
 
