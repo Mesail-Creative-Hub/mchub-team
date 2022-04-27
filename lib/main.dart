@@ -31,8 +31,8 @@ class _AppNavigationState extends State<AppNavigation> {
   int _selectedIndex = 0;
   final List<Widget> _widgetOptions = <Widget>[
     const Home(),
-    const Text("Favorite"),
-    const Text("Cart"),
+    const Text("Bookmark"),
+    const Text("Chat"),
     const Text("Profile"),
   ];
 
@@ -45,15 +45,19 @@ class _AppNavigationState extends State<AppNavigation> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmark),
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.chat),
+            label: "",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_pin),
+            label: "",
           ),
         ],
         currentIndex: _selectedIndex,
